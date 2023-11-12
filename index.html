@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="calci.css">
+    <title> calculator</title>
+</head>
+<body>
+<fieldset id="calculate">
+
+    <h1>Calculator</h1>
+    <input type="num" style="height:10px !important" placeholder="" id="placeholder" readonly >
+    <input type="num" value="0" id="screen" readonly name="txtname">
+    <div id="turyare">
+    <button id="a" onclick="num('1')">1</button>
+    <button id="b" onclick="num('2')">2</button>
+    <button id="c" onclick="num('3')">3</button>
+
+    <button id="d" title="Backspace" onclick="bs()"><=</button>
+    <br><button id="e" onclick="num('4')">4</button>
+    <button id="f" onclick="num('5')">5</button>
+    <button id="g" onclick="num('6')">6</button>
+    <button id="h" onclick="op('+')">+</button>
+    <br><button id="i" onclick="num(7)">7</button>
+    <button id="j" onclick="num('8')">8</button>
+    <button id="k" onclick="num('9')">9</button>
+    <button id="l" onclick="op('-')">-</button>
+    <br><button id="m" onclick="num('.')">.</button>
+    <button id="n" onclick="num('0')">0</button>
+    <button id="o" onclick="num(00)">00</button>
+    <button id="p" title="multiply" onclick='op("x")'>x</button>
+    <br><button id="q" onclick="c()">c</button>
+    <button id="y" onclick="equal();">=</button>
+    <button id="n" onclick="sq()">^</button>
+    <button id="s" onclick="op('/')">/</button>
+
+</fieldset>
+</div>
+
+<script >
+    var no1 = "",no2 = "", cleared = "", opr = "", old_no = "" ;
+    
+    function c(){
+    document.getElementById("screen").value = "";
+    document.getElementById("placeholder").value = "";
+     no1 = "";
+     no2 = "";
+     cleared = "";
+     opr = "";
+     old_no = "";
+    }
+    
+    function num(no) {
+    
+     old_no = document.getElementById('screen').value;
+        
+        
+        if(old_no.includes(".") && no == "."){
+            return false;
+        }
+        
+        if(old_no == "0" && no != "."){
+                document.getElementById('screen').value = no;
+
+        }else if(old_no == "0" && no == "."){
+                document.getElementById('screen').value = old_no+no;
+
+        }
+        else if(opr == "" ){
+            
+        document.getElementById('screen').value = old_no + no;
+        
+        }else if (cleared == "true"){
+        document.getElementById('screen').value = old_no + no;
+        }
+        else{
+        cleared = "true";
+        document.getElementById('screen').value = no;
+        }
+        
+    
+    }
+    
+    function op(o){
+        opr = o;
+        no1 = document.getElementById("screen").value;
+        document.getElementById("placeholder").value= no1+ o;
+    }
+    
+    function equal(){
+        var res ;
+        no2 = document.getElementById("screen").value;
+        
+        if(opr == "+"){
+            res = (parseFloat(no1)+parseFloat(no2));
+        }
+        else if (opr == "-"){
+            res = (no1-no2);
+        }else if (opr == "x"){
+            res = (no1*no2);
+        }else{
+            res = (no1/no2);
+        } 
+        
+        document.getElementById("screen").value = (res);
+        document.getElementById("placeholder").value="";
+    }
+    function bs(){
+        var old = document.getElementById("screen").value;
+        
+        document.getElementById("screen").value = old.substring(0,old.length-1);
+    }
+    
+</script>
+
+</body>
+</html>
